@@ -1,6 +1,8 @@
 import { CloseButton } from "../../CloseButton";
 import { FeedbackType, feedbackTypes } from "..";
 import { ArrowLeft } from "phosphor-react";
+import { ScreenshotButton } from "../ScreenshotButton";
+import { useState } from "react";
 
 interface FeedbackContentStepProps {
   feedbackType: FeedbackType;
@@ -11,7 +13,10 @@ export function FeedbackContentStep({
   feedbackType,
   onFeedbackRestartRequested,
 }: FeedbackContentStepProps) {
+  const [screenshot, setScreenshot] = useState<string | null>(null);
+
   const feedbackTypeInfo = feedbackTypes[feedbackType];
+
   return (
     <>
       <header>
@@ -40,9 +45,13 @@ export function FeedbackContentStep({
         />
 
         <footer className="flex gap-2 mt-2">
+          <ScreenshotButton
+            screenshot={screenshot}
+            onScreenshotTook={setScreenshot}
+          />
           <button
             type="submit"
-            className="p-2 bg-brand-500 rounded-md border-transparent flex-1  flex justify-center items-center text-sm hover:bg-brand-300 focus:outline-none focus:ring-2 focus:ring-offset-zinc-900 focus:bg-brand-500 transition-colors"
+            className="p-2 bg-brand-500 rounded-md border-transparent flex-1  flex justify-center items-center text-sm hover:bg-brand-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-900 focus:bg-brand-500 transition-colors"
           >
             Enviar Feedback
           </button>
